@@ -1,17 +1,7 @@
 import * as Joi from 'joi';
 
 export const createCitySchema = Joi.object({
-  login: Joi.string().min(3).max(10).required(),
-  email: Joi.string().required(),
-  password: Joi.string().min(8).max(15).required(),
-});
-
-export const updateCitySchema = Joi.object({
-  login: Joi.string().min(3).max(10).required(),
-  email: Joi.string().required(),
-  password: Joi.string().min(8).max(15).required(),
-  birthDate: Joi.string().required(),
-  cityId: Joi.number().required(),
+  name: Joi.string().required(),
 });
 
 export interface CityDto {

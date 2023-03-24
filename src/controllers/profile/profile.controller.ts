@@ -5,6 +5,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UsePipes,
 } from '@nestjs/common';
 import { ProfileService } from '../../services/profile/profile.service';
@@ -28,8 +29,8 @@ export class ProfileController {
   }
 
   @Get()
-  async findAll(): Promise<Profile[]> {
-    const profiles = await this.profileService.getAll();
+  async findAll(@Query() query: any): Promise<Profile[]> {
+    const profiles = await this.profileService.getAll(query);
     return profiles;
   }
 

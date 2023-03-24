@@ -16,8 +16,11 @@ export class CitiesService {
     return city;
   }
 
-  async getAll(): Promise<Cities[]> {
-    const cities = await this.citiesRepository.findAll();
+  async getAll(params: { offset: number; limit: number }): Promise<Cities[]> {
+    const cities = await this.citiesRepository.findAll({
+      offset: (params.offset - 1) * params.limit,
+      limit: params.limit,
+    });
     return cities;
   }
 

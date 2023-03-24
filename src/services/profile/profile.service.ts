@@ -19,8 +19,11 @@ export class ProfileService {
     return profile;
   }
 
-  async getAll(): Promise<Profile[]> {
-    const profiles = await this.profileRepository.findAll();
+  async getAll(params: { offset: number; limit: number }): Promise<Profile[]> {
+    const profiles = await this.profileRepository.findAll({
+      offset: (params.offset - 1) * params.limit,
+      limit: params.limit,
+    });
     return profiles;
   }
 
