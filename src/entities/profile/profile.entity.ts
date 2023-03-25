@@ -1,3 +1,4 @@
+import { Cities } from '../cities/cities.entity';
 import {
   Table,
   Column,
@@ -5,6 +6,8 @@ import {
   DataType,
   PrimaryKey,
   Unique,
+  BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
 
 @Table
@@ -41,6 +44,18 @@ export class Profile extends Model<Profile> {
   @Column({
     type: DataType.STRING,
     allowNull: true,
+    onDelete: 'restrict',
   })
   birthDate: string;
+
+  @ForeignKey(() => Cities)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    onDelete: 'restrict',
+  })
+  cityId: string;
+
+  @BelongsTo(() => Cities)
+  city: Cities;
 }

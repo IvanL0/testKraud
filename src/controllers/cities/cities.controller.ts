@@ -24,11 +24,11 @@ export class CitiesController {
     return cities;
   }
 
-  @Post()
-  @UsePipes(new JoiValidationPipe(createCitySchema))
-  async create(@Body() createProfile: CreateCityDto): Promise<Cities> {
-    console.log('CREATE_PROFILE', createProfile);
-    const profile = await this.citiesService.create(createProfile);
-    return profile;
-  }
+  // @Post()
+  // @UsePipes(new JoiValidationPipe(createCitySchema))
+  // async create(@Body() createProfile: CreateCityDto): Promise<Cities> {
+  //   console.log('CREATE_PROFILE', createProfile);
+  //   const profile = await this.citiesService.create(createProfile as Cities);
+  //   return profile;
+  // }
 }

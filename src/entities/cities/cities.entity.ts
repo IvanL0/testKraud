@@ -1,3 +1,4 @@
+import { Profile } from '../profile/profile.entity';
 import {
   Table,
   Column,
@@ -5,6 +6,7 @@ import {
   DataType,
   PrimaryKey,
   Unique,
+  HasMany,
 } from 'sequelize-typescript';
 
 @Table
@@ -24,4 +26,7 @@ export class Cities extends Model<Cities> {
     allowNull: false,
   })
   name: string;
+
+  @HasMany(() => Profile)
+  pofile: Profile[];
 }
