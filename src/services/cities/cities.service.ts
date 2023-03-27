@@ -31,8 +31,6 @@ export class CitiesService {
       return await this.citiesRepository
         .findOne({ where: { name: city.name } })
         .then(async (dbCity) => {
-          // We check if a language already exists.
-          // If it does don't create a new one.
           if (dbCity) {
             return Promise.resolve(null);
           }
