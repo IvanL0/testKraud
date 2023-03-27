@@ -12,6 +12,16 @@ export class ProfileService {
     private readonly profileRepository: typeof Profile,
   ) {}
 
+  isEmailAlreadyUsed = async (email: string): Promise<boolean> => {
+    const profile = await this.profileRepository.findOne<Profile>({
+      where: { email: email },
+    });
+    if (profile) {
+      return true;
+    }
+    return false;
+  };
+
   async getByLogin(login: string): Promise<Profile | null> {
     let profile = await this.profileRepository.findOne<Profile>({
       where: { login: login },

@@ -21,6 +21,7 @@ import {
   ProfileDto,
   UpdateProfileDto,
   createProfileSchema,
+  updateProfileSchema,
   CreateProfileDto,
 } from '../../dtos/profile/Profile.dto';
 import { Profile } from '../../entities/profile/profile.entity';
@@ -74,6 +75,12 @@ export class ProfileController {
     if (error) {
       return res.status(422).send(error);
     }
+    const checkEmail = await this.profileService.isEmailAlreadyUsed(
+      createProfileDto.email,
+    );
+    if (checkEmail) {
+      return res.status(400).send({ message: 'Email already in use' });
+    }
     const profile = await this.profileService.create(createProfileDto);
     return res.status(201).send(profile);
   }
@@ -89,13 +96,17 @@ export class ProfileController {
   async update(
     @Param('id') id: string,
     @Body() updateProfile: UpdateProfileDto,
-  ): Promise<ProfileDto> {
+    @Res() res: Response,
+  ): Promise<Response> {
+    const { error } = updateProfileSchema.validate(UpdateProfileDto);
+    if (error) {
+      return res.status(422).send(error);
+    }
     const profileId = parseInt(id);
     const profile = await this.profileService.update(profileId, updateProfile);
-    return profile;
+    return res.status(201).send(profile);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(
     @Param('id') id: string,

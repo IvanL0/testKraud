@@ -8,11 +8,11 @@ export const createProfileSchema = Joi.object({
 }).options({ abortEarly: false });
 
 export const updateProfileSchema = Joi.object({
-  login: Joi.string().min(3).max(10).required(),
-  email: Joi.string().required(),
-  password: Joi.string().min(8).max(15).required(),
+  login: Joi.string().min(3).max(10).optional(),
+  email: Joi.string().optional(),
+  password: Joi.string().min(8).max(15).optional(),
   birthDate: Joi.string().required(),
-  cityId: Joi.number().required(),
+  cityId: Joi.number().optional(),
 }).options({ abortEarly: false });
 
 export class ProfileDto {

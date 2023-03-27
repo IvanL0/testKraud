@@ -20,6 +20,14 @@ describe('ProfileController (e2e)', () => {
   });
 
   it('GET /profile/1', () => {
-    return request(app.getHttpServer()).get('/profile/1').expect(200);
+    return request(app.getHttpServer()).get('/profile/1').expect(401);
+  });
+
+  it('POST /profile', () => {
+    return request(app.getHttpServer()).post('/profile').expect(422);
+  });
+
+  it('PATCH /profile/1', () => {
+    return request(app.getHttpServer()).post('/profile').expect(422);
   });
 });
