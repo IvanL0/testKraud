@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from '../src/controllers/app.controller';
 import { ProfileController } from '../src/controllers/profile/profile.controller';
 import { ProfileService } from '../src/services/profile/profile.service';
+import * as response from 'supertest';
 
 describe('AppController', () => {
   let profileController: ProfileController;
@@ -17,7 +17,14 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(profileController.findAll()).toBe({ login: 'ion' });
+      expect(
+        profileController.create(
+          { login: 'ion', password: '123', email: 'aaa' },
+          response,
+        ),
+      ).toBe({
+        login: 'ion',
+      });
     });
   });
 });

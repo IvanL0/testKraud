@@ -52,12 +52,13 @@ export class ProfileController {
   }
 
   @Get()
+  @ApiOkResponse({ description: 'The newly created item', type: Profile })
   async findAll(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    const offset = req.query.offset as string;
-    const limit = req.query.limit as string;
+    const offset = req.query.offset || '1';
+    const limit = req.query.limit || '10';
     const profiles = await this.profileService.getAll({
-      offset: parseInt(offset),
-      limit: parseInt(limit),
+      offset: parseInt(offset as string),
+      limit: parseInt(limit as string),
     });
     return res.status(200).send(profiles);
   }

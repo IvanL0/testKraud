@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import request from 'supertest';
 import { AppModule } from './../src/app.module';
 
 describe('ProfileController (e2e)', () => {
@@ -15,10 +15,11 @@ describe('ProfileController (e2e)', () => {
     await app.init();
   });
 
-  it('/profile (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect({ login: 'ion' });
+  it('GET /profile', () => {
+    return request(app.getHttpServer()).get('/profile').expect(200);
+  });
+
+  it('GET /profile/1', () => {
+    return request(app.getHttpServer()).get('/profile/1').expect(200);
   });
 });
