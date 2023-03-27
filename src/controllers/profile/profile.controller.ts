@@ -102,7 +102,7 @@ export class ProfileController {
     @Res() res: Response,
   ): Promise<Response> {
     const profileId = parseInt(id);
-    await this.profileService.delete(profileId);
+    this.profileService.delete(profileId);
     return res.status(204);
   }
 }

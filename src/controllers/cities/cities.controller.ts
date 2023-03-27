@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Req, Res, Delete, Param } from '@nestjs/common';
 import { CitiesService } from '../../services/cities/cities.service';
 import { Request, Response } from 'express';
 
@@ -15,5 +15,15 @@ export class CitiesController {
       limit: parseInt(limit as string),
     });
     return res.status(200).send(cities);
+  }
+
+  @Delete(':id')
+  async delete(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const cityId = parseInt(id);
+    this.citiesService.delete(cityId);
+    return res.status(204);
   }
 }

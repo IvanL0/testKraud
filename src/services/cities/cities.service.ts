@@ -44,8 +44,8 @@ export class CitiesService {
     });
   }
 
-  async update(id: number, cityUpdate: UpdateCityDto): Promise<any> {
-    const city = await this.citiesRepository.update(cityUpdate, {
+  async delete(id: number): Promise<any> {
+    const city = await this.citiesRepository.destroy({
       where: { id: id },
     });
     return city;
