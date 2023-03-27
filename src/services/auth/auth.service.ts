@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ProfileService } from '../profile/profile.service';
 import { JwtService } from '@nestjs/jwt';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class AuthService {
@@ -21,7 +23,9 @@ export class AuthService {
   async login(user: any) {
     const payload = { username: user.login, sub: user.id };
     return {
-      access_token: this.jwtService.sign(payload, { secret: 'secret' }),
+      access_token: this.jwtService.sign(payload, {
+        secret: process.env.JWT_SECRET,
+      }),
     };
   }
 }
