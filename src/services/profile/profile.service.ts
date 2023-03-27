@@ -13,10 +13,10 @@ export class ProfileService {
   ) {}
 
   async getByLogin(login: string): Promise<Profile | null> {
-    const profile = await this.profileRepository.findOne<Profile>({
+    let profile = await this.profileRepository.findOne<Profile>({
       where: { login: login },
     });
-    console.log('PROFILE');
+    profile = JSON.parse(JSON.stringify(profile));
     return profile;
   }
 
@@ -45,5 +45,12 @@ export class ProfileService {
       where: { id: id },
     });
     return profile;
+  }
+
+  async delete(id: number): Promise<any> {
+    await this.profileRepository.destroy({
+      where: { id: id },
+    });
+    return true;
   }
 }

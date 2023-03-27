@@ -8,6 +8,7 @@ import {
   Req,
   UseGuards,
   Res,
+  Delete,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -65,12 +66,11 @@ export class ProfileController {
 
   @Post()
   @ApiOkResponse({ description: 'The newly created item', type: Profile })
-  async create(
+  async registration(
     @Body() createProfileDto: CreateProfileDto,
     @Res() res: Response,
   ): Promise<Response> {
     const { error } = createProfileSchema.validate(createProfileDto);
-    console.log('ERROR', error);
     if (error) {
       return res.status(422).send(error);
     }
@@ -90,9 +90,19 @@ export class ProfileController {
     @Param('id') id: string,
     @Body() updateProfile: UpdateProfileDto,
   ): Promise<ProfileDto> {
-    console.log('UPDATE_PROFILE', updateProfile);
     const profileId = parseInt(id);
     const profile = await this.profileService.update(profileId, updateProfile);
     return profile;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async delete(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const profileId = parseInt(id);
+    await this.profileService.delete(profileId);
+    return res.status(204);
   }
 }

@@ -3,9 +3,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export const createProfileSchema = Joi.object({
   login: Joi.string().min(3).max(10).required(),
-  email: Joi.string().required(),
+  email: Joi.string().email().required(),
   password: Joi.string().min(8).max(15).required(),
-});
+}).options({ abortEarly: false });
 
 export const updateProfileSchema = Joi.object({
   login: Joi.string().min(3).max(10).required(),
@@ -13,7 +13,7 @@ export const updateProfileSchema = Joi.object({
   password: Joi.string().min(8).max(15).required(),
   birthDate: Joi.string().required(),
   cityId: Joi.number().required(),
-});
+}).options({ abortEarly: false });
 
 export class ProfileDto {
   @ApiProperty()
