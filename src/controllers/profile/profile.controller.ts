@@ -18,7 +18,6 @@ import {
 } from '@nestjs/swagger';
 import { ProfileService } from '../../services/profile/profile.service';
 import {
-  ProfileDto,
   UpdateProfileDto,
   createProfileSchema,
   updateProfileSchema,
