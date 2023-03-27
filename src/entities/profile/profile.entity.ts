@@ -9,6 +9,7 @@ import {
   BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Table
 export class Profile extends Model<Profile> {
@@ -19,12 +20,14 @@ export class Profile extends Model<Profile> {
     autoIncrement: true,
     allowNull: false,
   })
+  @ApiProperty()
   id: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
+  @ApiProperty()
   login: string;
 
   @Unique
@@ -33,6 +36,7 @@ export class Profile extends Model<Profile> {
     unique: true,
     allowNull: false,
   })
+  @ApiProperty()
   email: string;
 
   @Column({
@@ -46,15 +50,17 @@ export class Profile extends Model<Profile> {
     allowNull: true,
     onDelete: 'restrict',
   })
+  @ApiProperty()
   birthDate: string;
 
   @ForeignKey(() => Cities)
   @Column({
     type: DataType.INTEGER,
-    allowNull: true,
     onDelete: 'restrict',
+    allowNull: true,
   })
-  cityId: string;
+  @ApiProperty()
+  cityId: number;
 
   @BelongsTo(() => Cities)
   city: Cities;

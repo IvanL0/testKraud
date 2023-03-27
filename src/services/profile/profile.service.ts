@@ -12,6 +12,14 @@ export class ProfileService {
     private readonly profileRepository: typeof Profile,
   ) {}
 
+  async getByLogin(login: string): Promise<Profile | null> {
+    const profile = await this.profileRepository.findOne<Profile>({
+      where: { login: login },
+    });
+    console.log('PROFILE');
+    return profile;
+  }
+
   async getOne(id: number): Promise<Profile | null> {
     const profile = await this.profileRepository.findOne<Profile>({
       where: { id: id },

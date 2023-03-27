@@ -1,4 +1,5 @@
 import * as Joi from 'joi';
+import { ApiProperty } from '@nestjs/swagger';
 
 export const createProfileSchema = Joi.object({
   login: Joi.string().min(3).max(10).required(),
@@ -14,20 +15,61 @@ export const updateProfileSchema = Joi.object({
   cityId: Joi.number().required(),
 });
 
-export interface ProfileDto {
+export class ProfileDto {
+  @ApiProperty()
+  login: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string;
+
+  @ApiProperty()
+  birthDate?: string;
+}
+
+export class CreateProfileDto {
+  @ApiProperty()
+  login: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string;
+}
+
+export class UpdateProfileDto {
+  @ApiProperty()
+  login: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string;
+
+  @ApiProperty()
+  birthDate?: string;
+
+  @ApiProperty()
+  cityId: number;
+}
+export interface ProfileAttributes {
   login: string;
   email: string;
   password: string;
   birthDate?: string;
 }
 
-export interface CreateProfileDto {
+export interface CreateProfileAttributes {
   login: string;
   email: string;
   password: string;
 }
 
-export interface UpdateProfileDto {
+export interface UpdateProfileAttributes {
   login: string;
   email: string;
   password: string;

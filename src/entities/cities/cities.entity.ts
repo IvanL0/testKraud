@@ -1,4 +1,5 @@
 import { Profile } from '../profile/profile.entity';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Table,
   Column,
@@ -18,6 +19,7 @@ export class Cities extends Model<Cities> {
     autoIncrement: true,
     allowNull: false,
   })
+  @ApiProperty()
   id: number;
 
   @Unique
@@ -25,6 +27,7 @@ export class Cities extends Model<Cities> {
     type: DataType.STRING,
     allowNull: false,
   })
+  @ApiProperty()
   name: string;
 
   @HasMany(() => Profile)

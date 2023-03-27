@@ -1,18 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-  UsePipes,
-} from '@nestjs/common';
-import { JoiValidationPipe } from '../../pipes/joi.pipe';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CitiesService } from '../../services/cities/cities.service';
 import { Cities } from '../../entities/cities/cities.entity';
-import { CreateCityDto } from '../../../dist/dtos/cities/Cities.dto';
-import { createCitySchema } from '../../dtos/cities/Cities.dto';
 
 @Controller('cities')
 export class CitiesController {
