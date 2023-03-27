@@ -88,7 +88,13 @@ export class ProfileController {
   @Post('login')
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async login(@Req() req: Request) {
-    return this.authService.login(req.user);
+    const user = await this.profileService.getByLogin(req.body.username);
+    const token = await this.authService.login(req.user);
+    const result = {
+      ...user,
+      accessToken: token.access_token,
+    };
+    return result;
   }
 
   @Patch(':id')
