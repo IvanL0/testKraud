@@ -24,6 +24,6 @@ describe('AppController', () => {
   it('profileController should be defined', () => {
     const dto = new CreateProfileDto();
     const res = {} as Response;
-    expect(profileController.registration(dto, res)).not.toEqual(null);
+    expect(profileController.registration(dto, res)).toHaveBeenCalled();
   });
 });
