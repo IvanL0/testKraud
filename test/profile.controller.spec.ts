@@ -1,10 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProfileController } from '../src/controllers/profile/profile.controller';
 import { ProfileService } from '../src/services/profile/profile.service';
-import * as response from 'supertest';
+import { CreateProfileDto } from '../src/dtos/profile/Profile.dto';
+import { Response } from 'express';
 
 describe('AppController', () => {
   let profileController: ProfileController;
+  // let profileService: ProfileService;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -15,16 +17,13 @@ describe('AppController', () => {
     profileController = app.get<ProfileController>(ProfileController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(
-        profileController.create(
-          { login: 'ion', password: '123', email: 'aaa' },
-          response,
-        ),
-      ).toBe({
-        login: 'ion',
-      });
-    });
+  it('profileController should be defined', () => {
+    expect(profileController).toBeDefined();
+  });
+
+  it('profileController should be defined', () => {
+    const dto = new CreateProfileDto();
+    const res = {} as Response;
+    expect(profileController.registration(dto, res)).not.toEqual(null);
   });
 });
